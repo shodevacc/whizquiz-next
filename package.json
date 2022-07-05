@@ -1,0 +1,40 @@
+{
+  "name": "wizquiz",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "git": "git add . && git commit -m \"changes\" && git push"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "axios": "^0.27.2",
+    "cookies": "^0.8.0",
+    "cookies-next": "^2.1.1",
+    "dayjs": "^1.11.3",
+    "edit-json-file": "^1.7.0",
+    "formik": "^2.2.9",
+    "jose": "^4.8.3",
+    "jsonwebtoken": "^8.5.1",
+    "next": "12.2.0",
+    "next-connect": "^0.12.2",
+    "react": "18.2.0",
+    "react-confetti": "^6.1.0",
+    "react-dom": "18.2.0",
+    "react-query": "^3.39.1",
+    "styled-components": "^5.3.5",
+    "yup": "^0.32.11",
+    "zustand": "^4.0.0-rc.1"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-styled-components": "^2.0.7",
+    "eslint": "8.19.0",
+    "eslint-config-next": "12.2.0"
+  }
+}
