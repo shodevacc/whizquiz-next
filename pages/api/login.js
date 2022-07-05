@@ -1,13 +1,9 @@
 import nc from "next-connect";
-import jwt from 'jsonwebtoken';
 import { SignJWT } from 'jose'
 import ValidationHandler from 'backend/ValidationHandler'
 import { login_schema } from 'backend/schema'
 import { prevalidateBody, nextConnectConfig } from 'backend'
 import Cookies from 'cookies'
-const crypto = require('crypto')
-const editJsonFile = require("edit-json-file");
-const path = require('path')
 
 
 export default nc(nextConnectConfig).post(async (req, res, next) => {
