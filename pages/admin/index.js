@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Title } from 'styled'
 import { useMutation } from 'react-query'
+import { requireAuthentication } from 'utils'
 import Head from 'next/head';
 
 const Table = styled.table`
@@ -45,7 +46,7 @@ export default function View({ file }) {
     // if (isSuccess) {
     //     router.reload(window.location.pathname)
     // }
-    console.log("THE FILE", file)
+    // console.log("THE FILE", file)
     const handleDelete = async (data) => {
         setLoading(true)
         try {
@@ -106,10 +107,10 @@ export default function View({ file }) {
     )
 }
 
-export async function getServerSideProps({ req, res }) {
+export const getServerSideProps = requireAuthentication(async () => {
+
     const editJsonFile = require("edit-json-file");
     const path = require('path')
-
     let file = editJsonFile(path.join(process.cwd(), "db", "db.json"));
 
     return {
@@ -117,4 +118,4 @@ export async function getServerSideProps({ req, res }) {
             file: file.get()
         }
     }
-}
+})

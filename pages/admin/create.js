@@ -2,7 +2,7 @@ import React from 'react'
 import dayjs from 'dayjs'
 import AdminLayout from 'Layout/admin'
 import axios from 'axios'
-import ErrorOverlay from 'components/ErrorOverlay'
+import { requireAuthentication } from 'utils'
 import { useErrorLoadOverlay } from 'hooks'
 import { useRouter } from 'next/router'
 import { FieldContaner, Input, Label, ErrorMessage, Row, Button } from 'styled'
@@ -31,10 +31,10 @@ export default function Create() {
         <>
             {errorElement}
             {loadingElement}
-            <AdminLayout>
+            <AdminLayout backUrl="/admin">
                 <Formik
                     onSubmit={async (values, actions) => {
-                        console.log("VALUES", values)
+                        // console.log("VALUES", values)
                         setLoading(true)
                         actions.setSubmitting(true)
                         try {
@@ -77,7 +77,7 @@ export default function Create() {
                             <Row>
                                 <Field name="date">
                                     {({ field, form }) => {
-                                        console.log("form", form)
+                                        // console.log("form", form)
                                         return (
                                             <FieldContaner>
                                                 <Label htmlFor='date'>date</Label>
@@ -133,6 +133,7 @@ function QuestionForm() {
         <FieldArray name="answerKey">
             {({ field, form, ...arrayHelpers }) => {
                 return (form.values.answerKey.map((data, index) => {
+                    // console.log("KEYS",`answerkey-${index}`)
                     return (
                         <>
                             <Row key={`answerkey-${index}`}>
@@ -170,3 +171,10 @@ function QuestionForm() {
         </FieldArray>
     )
 }
+
+export const getServerSideProps = requireAuthentication(async () => {
+    return {
+        props: {
+        }
+    }
+})

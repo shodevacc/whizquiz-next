@@ -36,7 +36,7 @@ const Back = styled(FontAwesomeIcon)`
     }
 `
 
-export default function AdminLayout({ children, backUrl = null, noOptions = false }) {
+export default function AdminLayout({ children, backUrl = null, noOptions = false, handleDelete = null }) {
     const router = useRouter()
     const { setError, setLoading, errorElement, loadingElement } = useErrorLoadOverlay()
     const handleLogout = async () => {
@@ -74,7 +74,8 @@ export default function AdminLayout({ children, backUrl = null, noOptions = fals
                         </Link>
                     </Center>
 
-                    <Button style={{margin:'0'}} onClick={handleLogout}>Logout</Button>
+                    {handleDelete && <Button onClick={handleDelete}>Delete Quiz</Button>}
+                    <Button style={{ margin: '0' }} onClick={handleLogout}>Logout</Button>
                 </Options>}
 
                 <Container>

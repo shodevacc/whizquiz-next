@@ -13,6 +13,7 @@ export default nc(nextConnectConfig).post(async (req, res, next) => {
     var body = prevalidateBody(req)
     await ValidationHandler(body, res, next, create_schema)
 }, async (req, res) => {
+    console.log("THE USER IS",req.user)
     const data = req.body
     dayjs.extend(customParseFormat)
 

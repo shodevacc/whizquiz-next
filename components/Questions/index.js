@@ -7,15 +7,13 @@ import { useQuiz } from 'state'
 
 
 export default function Index() {
-    const [currentCharacter, setCurrentCharacter] = React.useState(0)
-
     const { quiz, incrementQuestion, currentQuestionNumber } = useQuiz()
     const currentAnswerKey = quiz.answerKey[currentQuestionNumber]
     const [answer, setAnswer] = React.useState(initialiseAnswer(currentAnswerKey.answer.length))
     const charactersInAnswer = currentAnswerKey.answer.split('')
     const correctAnswer = (answer.toLowerCase() === currentAnswerKey.answer.toLowerCase())
     const isIncomplete = answer.includes('#')
-    console.log('  console.log(answer)', answer)
+
     React.useEffect(() => {
         setAnswer(initialiseAnswer(currentAnswerKey.answer.length))
         return () => { }

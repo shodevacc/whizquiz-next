@@ -5,11 +5,34 @@ import { useErrorLoadOverlay } from 'hooks'
 import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 import { Button } from 'styled'
+import { requireAuthentication } from 'utils'
 import styled from 'styled-components';
 
 const Title = styled.h2`
     text-align: center;
     ${({ theme }) => theme.colors.blue};
+`
+const Flex = styled.div`
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap:5px;
+    ${({ theme }) => theme.sizes.sm}{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+`
+const Card = styled.div`
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px;
+    p{
+        margin:10px 0;
+        span{
+            font-weight:600;
+        }
+    }
+
 `
 
 export default function Viewone({ file }) {
@@ -32,23 +55,23 @@ export default function Viewone({ file }) {
         <>
             {errorElement}
             {loadingElement}
-            <AdminLayout backUrl="/admin">
+            <AdminLayout backUrl="/admin" handleDelete={() => handleDelete({ id: file.id })}>
                 {file && file.answerKey && file.answerKey.length ? <>
-                    <Button onClick={() => {
-                        handleDelete({ id: file.id })
-                    }}>Delete Quiz</Button>
-
                     <div>
                         <Title> Word of the day: {file.word_of_the_day}</Title>
-                        <h2>Questions</h2>
-                        {file.answerKey.map((quesans, index) => {
-                            return (
-                                <ul key={index}>
-                                    <li>Question: {quesans.question}</li>
-                                    <li>Answer: {quesans.answer}</li>
-                                </ul>
-                            )
-                        })}
+                        <h2>Questions & Answers</h2>
+                        <Flex>
+                            {file.answerKey.map((quesans, index) => {
+                                return (
+                                    <Card key={`${quesans.question}-${index}`}>
+                                        <p>{index + 1}.</p>
+                                        <p><span>Question: </span><br />{quesans.question}</p>
+                                        <p><span>Answer: </span><br /> {quesans.answer}</p>
+                                    </Card>
+                                )
+                            })}
+                        </Flex>
+
                     </div>
                 </> :
                     <Title> No Quiz Exists for this Id</Title>
@@ -61,7 +84,7 @@ export default function Viewone({ file }) {
     )
 }
 
-export async function getServerSideProps({ req, res, query }) {
+export const getServerSideProps = requireAuthentication(async ({ req, res, query }) => {
     const editJsonFile = require("edit-json-file");
     const path = require('path')
 
@@ -77,11 +100,12 @@ export async function getServerSideProps({ req, res, query }) {
         }
 
     }
-    console.log("THE QUERY", filteredQuestion)
+    // console.log("THE QUERY", filteredQuestion)
 
     return {
         props: {
             file: filteredQuestion
         }
     }
-}
+})
+

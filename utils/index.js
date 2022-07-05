@@ -1,3 +1,5 @@
+import { jwtVerify } from 'jose'
+
 export const setAnswerColor = (answer, correctAnswer) => {
     // console.log("CHECK THIS",answer,correctAnswer)
     var currentAnswer = answer.toLowerCase()
@@ -28,4 +30,33 @@ export const initialiseAnswer = (length) => {
     for (let i = 0; i < length; i++)
         char += '#'
     return char
+}
+
+export function requireAuthentication(gssp) {
+    return async (ctx) => {
+        const { req } = ctx
+        const { token } = req.cookies;
+        try {
+            const { payload: { user } } = await jwtVerify(token, new TextEncoder().encode(process.env.SECRET))
+            if (!(user === process.env.ADMIN_USERNAME)) {
+                return {
+                    redirect: {
+                        permanant: false,
+                        destination: '/admin/login'
+                    }
+                }
+            }
+        }
+        catch (e) {
+            console.log("THE WRROR IS", e.message)
+            return {
+                redirect: {
+                    permanant: false,
+                    destination: '/admin/login'
+                }
+            }
+        }
+
+        return await gssp(ctx);
+    }
 }

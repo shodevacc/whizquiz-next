@@ -13,7 +13,7 @@ export default function Index() {
     const [answer, setAnswer] = React.useState(initialiseAnswer(WordofTheDay.length))
     // console.log("wordofday", WordofTheDay, allAnswers)
     const charactersInAnswer = WordofTheDay.split('')
-    const correctAnswer = (answer.toLocaleLowerCase() === WordofTheDay.toLocaleLowerCase())
+    const correctAnswer = (answer.toLowerCase() === WordofTheDay.toLowerCase())
     // console.log('currentAnswerKey', currentAnswerKey, answer)
     const isIncomplete = answer.includes('#')
     React.useEffect(() => {
