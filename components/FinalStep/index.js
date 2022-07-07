@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import Input from 'components/Input'
 import { setAnswerColor, initialiseAnswer } from 'utils'
 import { Title, Container, QuestionNumber, Button } from 'components/styled'
-import { useQuiz, useCelebrate } from 'state'
+import { useQuiz } from 'state'
 
 
 export default function Index() {
-    const { quiz, currentQuestionNumber, setQuizCompleted } = useQuiz()
-    const { setCelebrate } = useCelebrate()
+    const { quiz, setCelebrate, currentQuestionNumber, setQuizCompleted } = useQuiz()
     const WordofTheDay = quiz.word_of_the_day
     const currentAnswerKey = quiz.answerKey[currentQuestionNumber]
     const [answer, setAnswer] = React.useState(initialiseAnswer(WordofTheDay.length))

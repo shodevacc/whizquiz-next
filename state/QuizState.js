@@ -8,6 +8,7 @@ const initialState = {
         answerKey: [],
         word_of_the_day: ''
     },
+    celebrate: false,
     allAnswers: [],
     numberOfQuestions: 0,
     currentQuestionNumber: 0,
@@ -24,6 +25,12 @@ export const useQuiz = create(
                     allAnswers: quiz.answerKey.map(item => item.answer),
                     numberOfQuestions: quiz.answerKey.length,
                     quiz: quiz
+                }
+            }),
+            setCelebrate: (celebrateState) => set((state) => {
+                return {
+                    ...state,
+                    celebrate: celebrateState
                 }
             }),
             incrementQuestion: () => set((state) => {
@@ -67,14 +74,6 @@ export const useTimeLeft = create((set) => ({
             hours: time.hours,
             mins: time.mins,
             sec: time.sec
-        }
-    })
-}))
-export const useCelebrate = create((set) => ({
-    celebrate: false,
-    setCelebrate: (celebrateState) => set((state) => {
-        return {
-            celebrate: celebrateState
         }
     })
 }))
