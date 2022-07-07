@@ -4,9 +4,10 @@ import styled from 'styled-components';
 const StyledInput = styled.input`
     color: ${({ theme, correctAnswer, firstCharacter }) => correctAnswer ? (firstCharacter ? theme.colors.purple : theme.colors.green) : ''};
     border:none ;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.blue};
+    border-radius:0;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.blue};
     margin: 0 10px;
-    max-width:50px;
+    max-width:2em;
     font-weight:600;
     font-size:32px;
     text-transform: capitalize;
@@ -58,7 +59,7 @@ export default function Input({ answer, setCode, index, answerlength, correctAns
                 return
             }
             const ans = answer
-            console.log("DELETE NON EMPTY SPACE IN INput", index, ans, ans.slice(0, index), ans.slice(index + 1))
+            // console.log("DELETE NON EMPTY SPACE IN INput", index, ans, ans.slice(0, index), ans.slice(index + 1))
             setAnswer(state => state.replaceAt(index, '#'))
             setValue("")
             return

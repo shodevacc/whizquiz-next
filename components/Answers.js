@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Container as CTN } from 'components/styled'
-import { useQuiz } from 'state'
+import { useQuiz, useTimeLeft } from 'state'
 
 
 const Container = styled(CTN)`
@@ -21,9 +21,27 @@ const Title = styled.h3`
     text-align: center;
 `;
 
+const P = styled.p`
+text-align:center;
+display: inline-block;
+        text-transform: capitalize;
+      margin: 10px auto;
+      padding: 10px 20px;
+      background: ${({ theme }) => theme.colors.light_blue};
+      color:#fff;
+      border-radius: 20px;
+      font-weight:600;
+      background:${({ theme }) => theme.colors.light_blue};
+`
+const Center = styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+`
 export default function Answers() {
     const [answersToDisplay, setanswersToDisplay] = React.useState([])
-    const { quizCompleted, questionsCompleted, allAnswers, currentQuestionNumber } = useQuiz()
+    const { hours } = useTimeLeft()
+    const { quizCompleted, quiz, questionsCompleted, allAnswers, currentQuestionNumber } = useQuiz()
     // console.log(currentQuestionNumber, 'currentAnswerKey', allAnswers)
     React.useEffect(() => {
         if (questionsCompleted) {
@@ -35,10 +53,18 @@ export default function Answers() {
         return () => { }
     }, [currentQuestionNumber, questionsCompleted])
 
-    // console.log(answersToDisplay)
+    // console.log(answersToDisplay,currentQuestionNumber)
     return (
         <Container>
-            {(currentQuestionNumber !== 0) && <AnswerContainer>
+            {(currentQuestionNumber !== 0 || quizCompleted) && <AnswerContainer>
+
+                {quizCompleted && <>
+                    <Title style={{ color: '#fff', textDecoration: 'underline' }}>Word Of the Day</Title>
+                    <Center >
+                        <P>{quiz.word_of_the_day}</P>
+                    </Center>
+
+                </>}
                 <h2 style={{ textAlign: 'center' }}>Answers</h2>
                 <div className='answercontainer'>
                     {answersToDisplay.map((answer, index) => {
@@ -55,7 +81,7 @@ export default function Answers() {
                 </div>
             </AnswerContainer>}
             {
-                !quizCompleted && <Title>You have 24 hours to solve 5 questions to guess the word of
+                !quizCompleted && <Title>You have {hours} hours to solve {allAnswers.length} questions to guess the word of
                     the day
                 </Title>
             }

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Container, Title } from 'components/styled'
 import Confetti from 'components/Confetti'
-import { useQuiz } from 'state'
+import { useCelebrate } from 'state'
 
 export default function QuizCompleted() {
-    const { celebrate } = useQuiz()
+    const { celebrate } = useCelebrate()
     return (
         <Container>
             {celebrate && <Confetti />}

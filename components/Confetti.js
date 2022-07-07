@@ -15,6 +15,6 @@ export default function ConfettiComponent() {
         }
     }, [])
     return (
-        <Confetti height={dimensions.height} width={dimensions.width} />
+        <Confetti style={{ position: 'fixed' }} height={dimensions.height} width={dimensions.width} />
     )
 }

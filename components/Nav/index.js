@@ -30,17 +30,53 @@ const Icon = styled(FontAwesomeIcon)`
         font-size:25px;
     }
 `
+const Notification = styled.div`
+    position: fixed;
+    top:10%;
+    right:1%;
+    background: ${({ theme }) => theme.colors.light_blue};
+    padding: 5px 10px;
+    border-radius:5px;
+    p{
+        color: #fff;
+    }
+
+
+`
 export default function Index() {
     const [showHelp, setShowHelp] = React.useState(false)
+    const [showNotification, setShowNotification] = React.useState(false)
+
+    async function onShare() {
+        try {
+            await navigator.share({
+                title: "Whiz Quiz",
+                url: window.location.href
+            });
+        }
+
+        catch (e) {
+            if (e instanceof TypeError && !navigator.share) {
+                navigator.clipboard.writeText(window.location.href);
+                setShowNotification(true)
+                setTimeout(() => {
+                    setShowNotification(false)
+                }, 1500)
+            }
+        }
+    }
     return (
-        <>
+        <div style={{ zIndex: 10, position: 'relative' }}>
+            {showNotification && <Notification>
+                <p>Copied to clipboard</p>
+            </Notification>}
             {showHelp && <Help setState={setShowHelp} />}
             <Container>
-                <Icon onClick={()=>setShowHelp(true)} icon={faQuestionCircle} />
+                <Icon onClick={() => setShowHelp(true)} icon={faQuestionCircle} />
                 <Title>WhizQuiz</Title>
-                <Icon icon={faShareAlt} />
+                <Icon onClick={onShare} icon={faShareAlt} />
             </Container>
-        </>
+        </div>
 
     )
 }

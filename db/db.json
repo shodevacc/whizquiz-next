@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "91892445d889c029ed6e6a0aab0378c0",
+    "date": "2022-07-07",
+    "answerKey": [
+      {
+        "question": "opposite of bottom",
+        "answer": "top"
+      },
+      {
+        "question": "you hear with",
+        "answer": "ear"
+      },
+      {
+        "question": "drops of water falling from a cloud",
+        "answer": "rain"
+      },
+      {
+        "question": "the entrance you walk through to enter or leave a room",
+        "answer": "doorway"
+      },
+      {
+        "question": "people living next door to you",
+        "answer": "neighbours"
+      }
+    ],
+    "word_of_the_day": "TREND"
+  }
+]

@@ -8,7 +8,6 @@ const initialState = {
         answerKey: [],
         word_of_the_day: ''
     },
-    celebrate: false,
     allAnswers: [],
     numberOfQuestions: 0,
     currentQuestionNumber: 0,
@@ -47,12 +46,6 @@ export const useQuiz = create(
                     quizCompleted: completedState
                 }
             }),
-            setCelebrate: (celebrateState) => set((state) => {
-                return {
-                    ...state,
-                    celebrate: celebrateState
-                }
-            }),
             reset: () => set((state) => {
                 return {
                     ...initialState,
@@ -64,3 +57,24 @@ export const useQuiz = create(
             name: 'quiz'
         })
 )
+
+export const useTimeLeft = create((set) => ({
+    hours: '',
+    mins: '',
+    sec: '',
+    setTime: (time) => set(() => {
+        return {
+            hours: time.hours,
+            mins: time.mins,
+            sec: time.sec
+        }
+    })
+}))
+export const useCelebrate = create((set) => ({
+    celebrate: false,
+    setCelebrate: (celebrateState) => set((state) => {
+        return {
+            celebrate: celebrateState
+        }
+    })
+}))

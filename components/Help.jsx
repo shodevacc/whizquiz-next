@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { useQuiz, useTimeLeft } from 'state'
 
 const Container = styled.div`
     position: fixed;
@@ -20,7 +21,8 @@ const Container = styled.div`
 const ContainerInner = styled.div`
     background: #5472D3;
     width: 90%;
-    height:90vh ;
+    height:75vh ;
+    max-height:75vh ;
     padding:10px 30px;
     border-radius: 15px;
     overflow:scroll;
@@ -37,7 +39,7 @@ const AnswerContainer = styled.div`
     flex-wrap: wrap;
     p{
         span{
-            color:${({ theme }) => theme.colors.purple};
+            color:#E85AFF;
         }
         border-radius: 15px;
         padding: 10px;
@@ -45,7 +47,7 @@ const AnswerContainer = styled.div`
     }
 `
 const Purple = styled.p`
-    color: ${({ theme }) => theme.colors.purple} !important;
+    color: #E85AFF !important;
     font-weight: 700;
 `
 const Flex = styled.div`
@@ -72,11 +74,15 @@ const Button = styled.button`
     cursor:pointer ;
 `
 export default function Help({ setState }) {
+    const { numberOfQuestions } = useQuiz()
+    const { hours } = useTimeLeft()
     return (
         <Container>
             <ContainerInner>
-                <p>Find the answer to various questions. Use the first letter of these answers (Highlighted in purple)
-                    to unscramble the word of the day. You have unlimited tries</p>
+                <p>
+                    There are {numberOfQuestions ? numberOfQuestions : 'several'} questions in this puzzle.
+                    Use the first letter of each correct answer, (Highlighted in <span style={{ color: '#E85AFF', fontWeight:'600' }}>Purple</span>)
+                    to unscramble the word of the day. You have 24 hours of unlimited tries ({hours} hours Left)</p>
                 <p>Example:</p>
                 <p>Question 1</p>
                 <p>Opposite of Botton?</p>
