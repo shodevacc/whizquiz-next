@@ -39,8 +39,8 @@ export default function Index() {
         <Container>
             {/* {answer} */}
             <QuestionNumber className='smallTitle'>Question: {currentQuestionNumber + 1}</QuestionNumber>
-            <Title style={{ textTransform: 'capitalize' }}>{currentAnswerKey.question}</Title>
-            {code}
+            <Title lg style={{ textTransform: 'capitalize' }}>{currentAnswerKey.question}</Title>
+            {/* {code} */}
             <form className="form" onSubmit={handleSubmit}>
                 <div className='keys'>
                     {charactersInAnswer.map((char, index) => {

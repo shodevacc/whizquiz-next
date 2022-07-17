@@ -4,6 +4,10 @@ import { ErrorMessage as EM } from 'formik';
 export const Title = styled.h2`
     text-align: center;
     ${({ theme }) => theme.colors.blue};
+    font-size: 100px;
+    ${({ theme }) => theme.sizes.md}{
+        font-size:100px;
+    }
 `
 
 export const Button = styled.button`

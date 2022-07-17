@@ -20,14 +20,14 @@ const Container = styled.div`
 `;
 const ContainerInner = styled.div`
     background: #5472D3;
-    width: 90%;
-    height:75vh ;
-    max-height:75vh ;
+    width: 95%;
+    height:90vh ;
+    max-height:90vh ;
     padding:10px 30px;
     border-radius: 15px;
     overflow:scroll;
     ${({ theme }) => theme.sizes.md}{
-        width: 80%;
+        width: 95%;
     }
 `
 const AnswerContainer = styled.div`
@@ -43,10 +43,15 @@ const AnswerContainer = styled.div`
         }
         border-radius: 15px;
         padding: 10px;
-        background: ${({ theme }) => theme.colors.light_blue}; ;
+        background: ${({ theme }) => theme.colors.blue_dark}; ;
     }
 `
 const Purple = styled.p`
+    background: ${({ theme }) => theme.colors.blue_dark};
+    padding: 5px;
+    border-radius: 10px;
+    display: block;
+    text-align:center;
     color: #E85AFF !important;
     font-weight: 700;
 `
@@ -81,7 +86,7 @@ export default function Help({ setState }) {
             <ContainerInner>
                 <p>
                     There are {numberOfQuestions ? numberOfQuestions : 'several'} questions in this puzzle.
-                    Use the first letter of each correct answer, (Highlighted in <span style={{ color: '#E85AFF', fontWeight:'600' }}>Purple</span>)
+                    Use the first letter of each correct answer, (Highlighted in <span style={{ color: '#E85AFF', fontWeight: '600', background: '#010f31', padding: '5px', borderRadius: '10px' }}>Purple</span>)
                     to unscramble the word of the day. You have 24 hours of unlimited tries ({hours} hours Left)</p>
                 <p>Example:</p>
                 <p>Question 1</p>

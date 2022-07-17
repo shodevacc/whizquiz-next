@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const QuestionNumber = styled.h2`
     color: ${({ theme }) => theme.colors.blue};
-
 `
 export const Title = styled.h2`
     text-align: center;

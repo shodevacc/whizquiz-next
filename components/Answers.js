@@ -27,11 +27,10 @@ display: inline-block;
         text-transform: capitalize;
       margin: 10px auto;
       padding: 10px 20px;
-      background: ${({ theme }) => theme.colors.light_blue};
       color:#fff;
       border-radius: 20px;
       font-weight:600;
-      background:${({ theme }) => theme.colors.light_blue};
+      background:${({ theme }) => theme.colors.blue_dark};
 `
 const Center = styled.div`
     display:flex;

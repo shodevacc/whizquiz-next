@@ -13,6 +13,23 @@ const Container = styled.nav`
     
   /* height: ; */
 `;
+const Flex = styled.button`
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border:none;
+    background: ${({ theme }) => theme.colors.light_blue};
+      cursor:pointer;
+    p{
+        color: #fff;
+        margin:0;
+        margin-right:10px;
+        font-size:18px;
+        font-weight:500 ;
+    }
+`
 const Title = styled.h1`
     font-size: 24px;
     margin:0;
@@ -25,14 +42,14 @@ const Title = styled.h1`
 const Icon = styled(FontAwesomeIcon)`
     color: white;
     font-size: 20px;
-    cursor:pointer;
+    cursor: pointer;
     ${({ theme }) => theme.sizes.md}{
         font-size:25px;
     }
 `
 const Notification = styled.div`
     position: fixed;
-    top:10%;
+    top:12%;
     right:1%;
     background: ${({ theme }) => theme.colors.light_blue};
     padding: 5px 10px;
@@ -71,10 +88,14 @@ export default function Index() {
                 <p>Copied to clipboard</p>
             </Notification>}
             {showHelp && <Help setState={setShowHelp} />}
-            <Container>
+            <Container >
                 <Icon onClick={() => setShowHelp(true)} icon={faQuestionCircle} />
                 <Title>WhizQuiz</Title>
-                <Icon onClick={onShare} icon={faShareAlt} />
+                <Flex onClick={onShare}>
+                    <p>Share</p>
+                    <Icon icon={faShareAlt} />
+                </Flex>
+
             </Container>
         </div>
 

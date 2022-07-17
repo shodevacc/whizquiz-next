@@ -5,7 +5,7 @@ import Link from 'next/link'
 import styled from 'styled-components';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { Title } from 'styled'
+import { Title } from 'components/styled'
 import { useMutation } from 'react-query'
 import { requireAuthentication } from 'utils'
 import Head from 'next/head';
@@ -83,6 +83,7 @@ export default function View({ file }) {
                                                 <span><Button>View</Button></span>
                                             </Link>
                                         </Data>
+
                                         <Data>
                                             <Button onClick={() => {
                                                 handleDelete({ id: questions.id })
@@ -96,7 +97,7 @@ export default function View({ file }) {
                     </TableBody>
                 </Table> :
                     <div>
-                        <Title>
+                        <Title lg>
                             No Questions
                         </Title>
 

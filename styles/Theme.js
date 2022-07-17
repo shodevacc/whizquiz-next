@@ -3,14 +3,15 @@ const theme = {
     bg: "#121213",
     btnBasic: "#818384",
     tile: "#3a3a3c",
-    green:"#5eba7d",
-    purple:"#b45eba",
-    purple_light:"#5472D3",
-    text:"#3a3a3c",
-    blue:"#002171",
-    light_blue:"#29B6F6",
-    disabled:'gray',
-    disabled_text:'#e6e6e6',
+    green: "#5eba7d",
+    purple: "#b45eba",
+    purple_light: "#5472D3",
+    text: "#3a3a3c",
+    blue: "#002171",
+    light_blue: "#29B6F6",
+    disabled: 'gray',
+    disabled_text: '#e6e6e6',
+    blue_dark: "#010f31"
 
   },
   sizes: {

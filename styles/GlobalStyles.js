@@ -65,22 +65,29 @@ const GlobalStyle = createGlobalStyle`
       text-transform: capitalize;
       margin: 10px;
       padding: 10px 20px;
-      background: ${({ theme }) => theme.colors.light_blue};
       color:#fff;
       border-radius: 20px;
       font-weight:600;
-      background:${({ theme }) => theme.colors.light_blue};
+      background:${({ theme }) => theme.colors.blue_dark};
     }
     .subtitle{
       color:${({ theme }) => theme.colors.purple_light};
       text-align:center;
     }
-  @media screen and (min-width:768px){
-    
-    .smallTitle{
+    p{
       font-size:16px;
+    }
+  @media screen and (min-width:768px){
+    .subtitle{
+    font-size: 20px;
+    }
+    .smallTitle{
+      font-size:23px;
       font-weight:500;
       margin: 5px 0;
+    }
+    p{
+      font-size:18px;
     }
 
   }
