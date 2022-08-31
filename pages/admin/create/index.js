@@ -38,7 +38,7 @@ export default function Create() {
                         setLoading(true)
                         actions.setSubmitting(true)
                         try {
-                            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/create`, values)
+                            const res = await axios.post(`/api/create`, values)
                             if (res.status === 200) {
                                 router.push('/admin')
                             }

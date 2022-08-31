@@ -42,7 +42,7 @@ export default function AdminLayout({ children, backUrl = null, noOptions = fals
     const handleLogout = async () => {
         setLoading(true)
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`)
+            const res = await axios.post(`/api/logout`)
             if (res.status === 200) {
                 router.push('admin/login')
             }
