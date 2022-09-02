@@ -20,6 +20,7 @@
     "edit-json-file": "^1.7.0",
     "formik": "^2.2.9",
     "jose": "^4.8.3",
+    "mongodb": "^4.9.1",
     "next": "12.2.0",
     "next-connect": "^0.12.2",
     "react": "18.2.0",
@@ -27,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-query": "^3.39.1",
     "styled-components": "^5.3.5",
+    "uuid": "^8.3.2",
     "yup": "^0.32.11",
     "zustand": "^4.0.0-rc.1"
   },

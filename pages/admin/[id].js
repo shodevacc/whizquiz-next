@@ -4,9 +4,9 @@ import axios from 'axios'
 import { useErrorLoadOverlay } from 'hooks'
 import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
-import { Button } from 'styled'
 import { requireAuthentication } from 'utils'
 import styled from 'styled-components';
+import { connectToDatabase } from 'backend/connect'
 
 const Title = styled.h2`
     text-align: center;
@@ -51,11 +51,12 @@ export default function Viewone({ file }) {
             setError(e.response.data.error)
         }
     }
+
     return (
         <>
             {errorElement}
             {loadingElement}
-            <AdminLayout backUrl="/admin" handleDelete={() => handleDelete({ id: file.id })}>
+            <AdminLayout backUrl="/admin" handleDelete={() => handleDelete({ id: file._id })}>
                 {file && file.answerKey && file.answerKey.length ? <>
                     <div>
                         <Title> Word of the day: {file.word_of_the_day}</Title>
@@ -85,23 +86,10 @@ export default function Viewone({ file }) {
 }
 
 export const getServerSideProps = requireAuthentication(async ({ req, res, query }) => {
-    const editJsonFile = require("edit-json-file");
-    const path = require('path')
-
+    const { db, client } = await connectToDatabase()
     const { id } = query
-    let file = editJsonFile(path.join(process.cwd(), "db", "db.json"));
-    file = file.get()
-    let filteredQuestion = {}
-    for (let i = 0; i < file.length; i++) {
-        console.log(id, file[i].id)
-        if (id === file[i].id) {
-            filteredQuestion = file[i]
-            break;
-        }
-
-    }
-    // console.log("THE QUERY", filteredQuestion)
-
+    let filteredQuestion = await db.collection("questions").findOne({ _id: id })
+    client.close();
     return {
         props: {
             file: filteredQuestion

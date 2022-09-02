@@ -9,6 +9,7 @@ import { Title } from 'components/styled'
 import { useMutation } from 'react-query'
 import { requireAuthentication } from 'utils'
 import Head from 'next/head';
+import { connectToDatabase } from 'backend/connect'
 
 const Table = styled.table`
     width: 100%;
@@ -79,14 +80,14 @@ export default function View({ file }) {
                                         <Data>{questions.word_of_the_day}</Data>
                                         <Data>{questions.date}</Data>
                                         <Data>
-                                            <Link href={`admin/${questions.id}`} key={index}>
+                                            <Link href={`admin/${questions._id}`} key={index}>
                                                 <span><Button>View</Button></span>
                                             </Link>
                                         </Data>
 
                                         <Data>
                                             <Button onClick={() => {
-                                                handleDelete({ id: questions.id })
+                                                handleDelete({ id: questions._id })
                                             }}>Delete</Button>
                                         </Data>
                                     </Row>
@@ -109,14 +110,13 @@ export default function View({ file }) {
 }
 
 export const getServerSideProps = requireAuthentication(async () => {
-
-    const editJsonFile = require("edit-json-file");
-    const path = require('path')
-    let file = editJsonFile(path.join(process.cwd(), "db", "db.json"));
+    const { db, client } = await connectToDatabase()
+    const quizes = await db.collection('questions').find({}).sort({ date: -1 }).toArray();
+    client.close();
 
     return {
         props: {
-            file: file.get()
+            file: quizes
         }
     }
 })

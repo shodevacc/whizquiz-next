@@ -4,6 +4,7 @@ import Main from 'components/Main'
 import NoQuiz from 'components/NoQuiz'
 import React from 'react'
 import Nav from 'components/Nav'
+import { connectToDatabase } from 'backend/connect'
 import { useQuiz, useTimeLeft } from 'state'
 
 const addPadding = (val) => {
@@ -73,17 +74,16 @@ export default function Home({ quiz }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-  const editJsonFile = require("edit-json-file");
-  const path = require('path')
-  let file = editJsonFile(path.join(process.cwd(), "db", "db.json"));
-  const fileData = file.get()
-  const today = dayjs().hour(0).minute(0).second(0).millisecond(0)
-  // Returns undefined if quiz not found
-  const todayQuiz = fileData.find(quiz => dayjs(quiz.date).hour(0).minute(0).second(0).millisecond(0).isSame(today))
+  const { db, client } = await connectToDatabase()
+  // const exists = await db.collection("questions").findOne({ date: data.date })
+  const today = dayjs().hour(0).minute(0).second(0).millisecond(0).format('YYYY-MM-DD')
 
+  // Returns null if quiz not found
+  let todayQuiz = await db.collection("questions").findOne({ date: today })
+  client.close();
   return {
     props: {
-      quiz: todayQuiz || null
+      quiz: todayQuiz
     }, // will be passed to the page component as props
   }
 }
