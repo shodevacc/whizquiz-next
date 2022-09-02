@@ -67,7 +67,7 @@ export default function Index() {
     async function onShare() {
         try {
             await navigator.share({
-                title: "Whiz Quiz",
+                title: "TheWhizQuiz",
                 url: window.location.href
             });
         }
@@ -90,7 +90,7 @@ export default function Index() {
             {showHelp && <Help setState={setShowHelp} />}
             <Container >
                 <Icon onClick={() => setShowHelp(true)} icon={faQuestionCircle} />
-                <Title>WhizQuiz</Title>
+                <Title>TheWhizQuiz</Title>
                 <Flex onClick={onShare}>
                     <p>Share</p>
                     <Icon icon={faShareAlt} />
